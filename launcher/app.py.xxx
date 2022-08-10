@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-"""
 import os
 from datetime import datetime
 from kivy.lang import Builder
@@ -12,18 +11,9 @@ from os.path import dirname, join, exists
 import traceback
 
 KIVYLAUNCHER_PATHS = os.environ.get("KIVYLAUNCHER_PATHS")
-"""
-
-from kivy import Config
-Config.set('graphics', 'multisamples', '0')
-
-from kivy.app import App
-from kivy.uix.label import Label
-
 
 
 class Launcher(App):
-    """
     paths = ListProperty()
     logs = ListProperty()
     display_logs = BooleanProperty(False)
@@ -31,13 +21,8 @@ class Launcher(App):
     def log(self, log):
         print(log)
         self.logs.append(f"{datetime.now().strftime('%X.%f')}: {log}")
-    """
 
     def build(self):
-        print('[1]')
-        return Label(text="Hello World")
-
-	"""
         self.log('start of log')
 
         if KIVYLAUNCHER_PATHS:
@@ -58,9 +43,7 @@ class Launcher(App):
         if platform == 'android':
             from android.permissions import request_permissions, Permission
             request_permissions([Permission.READ_EXTERNAL_STORAGE])
-	"""
 
-"""
     def refresh_entries(self):
         data = []
         self.log('starting refresh')
@@ -154,4 +137,3 @@ class Launcher(App):
         activity.startActivity(intent)
         self.log('activity started')
         System.exit(0)
-"""
