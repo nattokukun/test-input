@@ -20,7 +20,10 @@ Config.set('graphics', 'multisamples', '0')
 from kivy.app import App
 from kivy.uix.label import Label
 
-
+####################
+import main
+from main import TestApp
+####################
 
 class Launcher(App):
     """
@@ -34,8 +37,12 @@ class Launcher(App):
     """
 
     def build(self):
-        print('[1]')
-        return Label(text="Hello World")
+	###########
+        ### print('[1]')
+        ### return Label(text="Hello World")
+
+	return TestApp().run()
+	#########
 
         """
         self.log('start of log')
