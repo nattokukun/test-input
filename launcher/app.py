@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+#######
+from kivy.lang import Builder
+#######
+
 """
 import os
 from datetime import datetime
@@ -22,10 +26,26 @@ from kivy.uix.label import Label
 
 ####################
 import main
-from main import TestApp
 ####################
 
 class Launcher(App):
+
+    ## 元メイン App派生クラスをコピー
+
+    def build(self):    # Root Widget
+	## kvファイルの明示的なロード
+        self.root = Builder.load_file("launcher/test.kv")
+
+        tp_mf = main.MainForm()
+        tp_mf.form_init()
+        return tp_mf
+
+    ## 元メイン if __name__ == '__main__':
+    ##              TestApp().run()
+    ## はコメント化
+
+
+    ## 以下すべてコメント
     """
     paths = ListProperty()
     logs = ListProperty()
@@ -35,16 +55,17 @@ class Launcher(App):
         print(log)
         self.logs.append(f"{datetime.now().strftime('%X.%f')}: {log}")
     """
-
+    """
     def build(self):
 	###########
         ### print('[1]')
         ### return Label(text="Hello World")
+	###########
 
 	return TestApp().run()
 	#########
 
-        """
+        ### ""
         self.log('start of log')
 
         if KIVYLAUNCHER_PATHS:
@@ -65,7 +86,8 @@ class Launcher(App):
         if platform == 'android':
             from android.permissions import request_permissions, Permission
             request_permissions([Permission.READ_EXTERNAL_STORAGE])
-        """
+        ### ""
+    """
 
     """
     def refresh_entries(self):
