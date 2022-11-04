@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 #######
-###	from kivy.lang import Builder
+from kivy.lang import Builder
 #######
 
 """
@@ -25,7 +25,7 @@ from kivy.app import App
 from kivy.uix.label import Label
 
 ####################
-###	import main
+import main
 ####################
 
 class Launcher(App):
@@ -33,18 +33,12 @@ class Launcher(App):
     ## 元メイン App派生クラスをコピー
 
     def build(self):    # Root Widget
-        print('[1]')
-        return Label(text="Hello World")
-##################
-	"""
 	## kvファイルの明示的なロード
         self.root = Builder.load_file("launcher/test.kv")
 
         tp_mf = main.MainForm()
         tp_mf.form_init()
         return tp_mf
-	"""
-##################
 
     ## 元メイン if __name__ == '__main__':
     ##              TestApp().run()
