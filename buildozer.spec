@@ -2,11 +2,11 @@
 
 # (str) Title of your application
 ## title = (NTK) Kivy Launcher
-title = hello
+title = Test Input
 
 # (str) Package name
 ## package.name = un_official_launcher
-package.name = test_hello
+package.name = test-input
 
 # (str) Package domain (needed for android/ios packaging)
 package.domain = org.kivy
