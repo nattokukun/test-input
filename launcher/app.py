@@ -24,10 +24,6 @@ Config.set('graphics', 'multisamples', '0')
 from kivy.app import App
 from kivy.uix.label import Label
 
-####################
-import mainxx
-####################
-
 class Launcher(App):
     """
     paths = ListProperty()
@@ -53,7 +49,9 @@ class Launcher(App):
 
 
         #############
-        tp_mf = mainxx.MainForm()
+        # from launcher.app import Launcher
+        from mainxx import MainForm
+        tp_mf = MainForm()
         tp_mf.form_init()
         return tp_mf
         #############
