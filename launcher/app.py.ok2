@@ -24,9 +24,7 @@ Config.set('graphics', 'multisamples', '0')
 from kivy.app import App
 from kivy.uix.label import Label
 
-####################
-import main
-####################
+
 
 class Launcher(App):
     """
@@ -47,16 +45,8 @@ class Launcher(App):
         #############
 
 
-        ## print('[1]')
-        ## return Label(text="Hello World")
-
-
-
-        #############
-        tp_mf = main.MainForm()
-        tp_mf.form_init()
-        return tp_mf
-        #############
+        print('[1]')
+        return Label(text="Hello World")
 
         """
         self.log('start of log')
