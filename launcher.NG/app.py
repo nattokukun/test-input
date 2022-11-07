@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+#######
+###	from kivy.lang import Builder
+#######
+
 """
 import os
 from datetime import datetime
@@ -14,16 +18,40 @@ import traceback
 KIVYLAUNCHER_PATHS = os.environ.get("KIVYLAUNCHER_PATHS")
 """
 
-
 from kivy import Config
 Config.set('graphics', 'multisamples', '0')
 
 from kivy.app import App
 from kivy.uix.label import Label
 
-
+####################
+###	import main
+####################
 
 class Launcher(App):
+
+    ## 元メイン App派生クラスをコピー
+
+    def build(self):    # Root Widget
+        print('[1]')
+        return Label(text="Hello World")
+##################
+	"""
+	## kvファイルの明示的なロード
+        self.root = Builder.load_file("launcher/test.kv")
+
+        tp_mf = main.MainForm()
+        tp_mf.form_init()
+        return tp_mf
+	"""
+##################
+
+    ## 元メイン if __name__ == '__main__':
+    ##              TestApp().run()
+    ## はコメント化
+
+
+    ## 以下すべてコメント
     """
     paths = ListProperty()
     logs = ListProperty()
@@ -33,12 +61,17 @@ class Launcher(App):
         print(log)
         self.logs.append(f"{datetime.now().strftime('%X.%f')}: {log}")
     """
-
+    """
     def build(self):
-        print('[1]')
-        return Label(text="Hello World")
+	###########
+        ### print('[1]')
+        ### return Label(text="Hello World")
+	###########
 
-        """
+	return TestApp().run()
+	#########
+
+        ### ""
         self.log('start of log')
 
         if KIVYLAUNCHER_PATHS:
@@ -59,7 +92,8 @@ class Launcher(App):
         if platform == 'android':
             from android.permissions import request_permissions, Permission
             request_permissions([Permission.READ_EXTERNAL_STORAGE])
-        """
+        ### ""
+    """
 
     """
     def refresh_entries(self):
