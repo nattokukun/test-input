@@ -14,9 +14,6 @@ import traceback
 KIVYLAUNCHER_PATHS = os.environ.get("KIVYLAUNCHER_PATHS")
 """
 
-#######
-from kivy.lang import Builder
-#######
 
 from kivy import Config
 Config.set('graphics', 'multisamples', '0')
@@ -38,13 +35,6 @@ class Launcher(App):
     """
 
     def build(self):
-
-        #############
-        ## kvファイルの明示的なロード
-        self.root = Builder.load_file("launcher/test.kv")
-        #############
-
-
         print('[1]')
         return Label(text="Hello World")
 
