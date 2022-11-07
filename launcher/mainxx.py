@@ -23,6 +23,17 @@ from cussys import debug_log
 # OpenGLの調整
 cussys.adjust_opengl(3)
 
+
+#####################
+import os, sys
+def resource_path(filename):
+    if hasattr(sys, '_MEIPASS'):
+        return os.path.join(sys._MEIPASS, filename)
+    return os.path.join(os.path.abspath("."), filename)
+#####################
+
+
+
 ########
 if cussys.is_windows():
     import japanize_kivy
@@ -31,7 +42,12 @@ else:
     from kivy.resources import resource_add_path        #              Userが指定する
     ## resource_add_path("/ipaexg00401")
     ## LabelBase.register(DEFAULT_FONT, "Noto Sans CJK.ttf")
-    LabelBase.register(DEFAULT_FONT, "ipaexg00401/ipaexg.ttf")
+    ##### LabelBase.register(DEFAULT_FONT, "ipaexg00401/ipaexg.ttf")
+
+    #######
+    LabelBase.register(DEFAULT_FONT, resource_path('ipaexg.ttf')) 
+    #######
+
     pass
     ## import japanize_kivy
     pass
