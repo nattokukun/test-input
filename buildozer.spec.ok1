@@ -6,7 +6,7 @@ title = TestInput
 
 # (str) Package name
 ## package.name = un_official_launcher
-#      name - is error!
+## name - is error!
 package.name = test_input
 
 # (str) Package domain (needed for android/ios packaging)
@@ -39,8 +39,9 @@ version = 0.1
 
 # (list) Application requirements
 # comma seperated e.g. requirements = sqlite3,kivy
-### requirements = python3,kivy==master,hostpython3,android
-requirements = python3==3.9.12,hostpython3==3.9.12,kivy,pyjnius,android
+requirements = python3,kivy==master,hostpython3,android
+
+### requirements = python3==3.9.12,hostpython3==3.9.12,kivy,pyjnius,android
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
