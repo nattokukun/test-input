@@ -25,7 +25,7 @@ from kivy.app import App
 from kivy.uix.label import Label
 
 ####################
-import mainxx
+import main
 ####################
 
 class Launcher(App):
@@ -53,7 +53,7 @@ class Launcher(App):
 
 
         #############
-        tp_mf = mainxx.MainForm()
+        tp_mf = main.MainForm()
         tp_mf.form_init()
         return tp_mf
         #############
