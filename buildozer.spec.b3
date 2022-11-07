@@ -6,8 +6,7 @@ title = TestInput
 
 # (str) Package name
 ## package.name = un_official_launcher
-## name - is error!
-package.name = test_input
+package.name = test-input
 
 # (str) Package domain (needed for android/ios packaging)
 package.domain = org.kivy
