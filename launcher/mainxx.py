@@ -45,7 +45,7 @@ else:
     ##### LabelBase.register(DEFAULT_FONT, "ipaexg00401/ipaexg.ttf")
 
     #######
-    LabelBase.register(DEFAULT_FONT, resource_path('ipaexg.ttf')) 
+    ##  LabelBase.register(DEFAULT_FONT, resource_path('ipaexg.ttf')) 
     #######
 
     pass
