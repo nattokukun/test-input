@@ -57,7 +57,7 @@ class Launcher(App):
         #############
         # from launcher.app import Launcher
 
-        from main import MainForm
+        from mainxx import MainForm
         tp_mf = MainForm()
         tp_mf.form_init()
         return tp_mf
