@@ -84,7 +84,40 @@ class MainForm(Widget):
 
     #----------------------------------------------
     #----------------------------------------------
+#################################
+        import cssys
+        if cssys.is_android():
+            """ ##
+            # ストレージ検証
+            cssys.test_adr_storage()
+            ## """
+            """
+            # Androidバージョンに応じて SDカード Android/data のアクセス許可を得る
+            self.access_ok = cssys.request_access_storage()
+            """
+            t_adr_ver = cssys.AndroidVersion()
+            if t_adr_ver.is_10_11:
+            # Android 10 以上
+            # SDカードは許可されているが、Android/data 内が読めない
+                t_access_ok = cssys.request_access_storage_10_11()
+            else:
+            # Android 10 未満
+            # SDカードの許可が必要
+                t_access_ok, t_sd_uri = cssys.request_access_storage_7_9()
+                """
+                try:
+                    t_access_ok, t_sd_uri = cssys.request_access_storage_7_9()
+                except:
+                    self.end_result(traceback.format_exc(), False)
+                    return
+                """
+            if not t_access_ok:
+                raise Exception('Access Error!')
+            else:
+                print('******** ok')
 
+
+#################################
 
 
     def on_focus(self, p_id_inst, p_on):
