@@ -37,9 +37,17 @@ class Launcher(App):
 
     def build(self):
 
+
+        #############
+        import sys
+        sys.path.append('launcher')
+        #############
+
+
         #############
         ## kvファイルの明示的なロード
-        self.root = Builder.load_file("launcher/test.kv")
+        ## self.root = Builder.load_file("launcher/test.kv")
+        self.root = Builder.load_file("test.kv")
         #############
 
 
@@ -53,9 +61,8 @@ class Launcher(App):
 
 
 
-        import sys
-        sys.path.append('launcher')
-        from mainxx import MainForm
+
+        from main import MainForm
         tp_mf = MainForm()
         tp_mf.form_init()
         return tp_mf
