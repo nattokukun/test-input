@@ -46,21 +46,16 @@ class Launcher(App):
 
         #############
         ## kvファイルの明示的なロード
-        ## self.root = Builder.load_file("launcher/test.kv")
-        self.root = Builder.load_file("test.kv")
+        self.root = Builder.load_file("launcher/test.kv")
+        ##self.root = Builder.load_file("test.kv")
         #############
 
 
         ## print('[1]')
         ## return Label(text="Hello World")
 
-
-
         #############
         # from launcher.app import Launcher
-
-
-
 
         from main import MainForm
         tp_mf = MainForm()
