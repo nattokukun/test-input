@@ -27,60 +27,12 @@ cussys.adjust_opengl(3)
 if cussys.is_windows():
     import japanize_kivy
 else:
-
-
-    #################################
-    import cssys
-    if cssys.is_android():
-        """ ##
-        # ストレージ検証
-        cssys.test_adr_storage()
-        ## """
-        """
-        # Androidバージョンに応じて SDカード Android/data のアクセス許可を得る
-        self.access_ok = cssys.request_access_storage()
-        """
-        t_adr_ver = cssys.AndroidVersion()
-        if t_adr_ver.is_10_11:
-        # Android 10 以上
-        # SDカードは許可されているが、Android/data 内が読めない
-            t_access_ok = cssys.request_access_storage_10_11()
-        else:
-        # Android 10 未満
-        # SDカードの許可が必要
-            t_access_ok, t_sd_uri = cssys.request_access_storage_7_9()
-            """
-            try:
-                t_access_ok, t_sd_uri = cssys.request_access_storage_7_9()
-            except:
-                self.end_result(traceback.format_exc(), False)
-                return
-            """
-        if not t_access_ok:
-            raise Exception('Access Error!')
-        else:
-            print('******** ok')
-        ################################
-
     #######################
     import cussys
     # 外部ストレージパス(実際は内部ストレージパス)を得る
     t_dir = cussys.adrd_get_external_storage_dir() + "/kivy/" + "ipaexg00401/ipaexg.ttf"
-    ## t_dir = t_dir + 'xx'
-    print('****************')
     print(t_dir)
-    print('****************')
 
-    from jnius import autoclass
-    Uri  = autoclass('android.net.Uri')
-    File = autoclass('java.io.File')
-    t_dir_uri = Uri.fromFile(File(t_dir))
-    import fmng
-    # ファイルサイズを得る
-    t_size = fmng.adr_get_file_size(t_dir_uri)
-    print('*** File Size ')
-    print(t_size)
-    print('****************')
 
 
 
@@ -89,7 +41,6 @@ else:
     from kivy.resources import resource_add_path        #              Userが指定する
     ## resource_add_path("/ipaexg00401")
     ## LabelBase.register(DEFAULT_FONT, "Noto Sans CJK.ttf")
-
     ## LabelBase.register(DEFAULT_FONT, "ipaexg00401/ipaexg.ttf")
 
     LabelBase.register(DEFAULT_FONT, t_dir)
@@ -133,6 +84,41 @@ class MainForm(Widget):
 
     #----------------------------------------------
     #----------------------------------------------
+#################################
+        import cssys
+        if cssys.is_android():
+            """ ##
+            # ストレージ検証
+            cssys.test_adr_storage()
+            ## """
+            """
+            # Androidバージョンに応じて SDカード Android/data のアクセス許可を得る
+            self.access_ok = cssys.request_access_storage()
+            """
+            t_adr_ver = cssys.AndroidVersion()
+            if t_adr_ver.is_10_11:
+            # Android 10 以上
+            # SDカードは許可されているが、Android/data 内が読めない
+                t_access_ok = cssys.request_access_storage_10_11()
+            else:
+            # Android 10 未満
+            # SDカードの許可が必要
+                t_access_ok, t_sd_uri = cssys.request_access_storage_7_9()
+                """
+                try:
+                    t_access_ok, t_sd_uri = cssys.request_access_storage_7_9()
+                except:
+                    self.end_result(traceback.format_exc(), False)
+                    return
+                """
+            if not t_access_ok:
+                raise Exception('Access Error!')
+            else:
+                print('******** ok')
+
+
+#################################
+
 
     def on_focus(self, p_id_inst, p_on):
         """
@@ -274,8 +260,10 @@ class TestApp(App):
         tp_mf.form_init()
         return tp_mf
 
+"""
 #---------------------------------------------------------------------------------
 #                   Run
 #---------------------------------------------------------------------------------
-## if __name__ == '__main__':
-##    TestApp().run()
+if __name__ == '__main__':
+    TestApp().run()
+"""
