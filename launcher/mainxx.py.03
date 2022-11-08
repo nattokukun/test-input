@@ -65,18 +65,16 @@ else:
     #######################
     import cussys
     # 外部ストレージパス(実際は内部ストレージパス)を得る
-    t_dir = cussys.adrd_get_external_storage_dir() + "/kivy/" + "ipaexg00401"
-    t_fnt = 'ipaexg.ttf'
-    t_fnt_path = t_dir + '/' + t_fnt
+    t_dir = cussys.adrd_get_external_storage_dir() + "/kivy/" + "ipaexg00401/ipaexg.ttf"
     ## t_dir = t_dir + 'xx'
     print('****************')
-    print(t_fnt_path)
+    print(t_dir)
     print('****************')
 
     from jnius import autoclass
     Uri  = autoclass('android.net.Uri')
     File = autoclass('java.io.File')
-    t_dir_uri = Uri.fromFile(File(t_fnt_path))
+    t_dir_uri = Uri.fromFile(File(t_dir))
     import fmng
     # ファイルサイズを得る
     t_size = fmng.adr_get_file_size(t_dir_uri)
@@ -94,12 +92,7 @@ else:
 
     ## LabelBase.register(DEFAULT_FONT, "ipaexg00401/ipaexg.ttf")
 
-    ## LabelBase.register(DEFAULT_FONT, t_dir)
-
-    print('****** new set')
-    resource_add_path(t_dir)
-    LabelBase.register(DEFAULT_FONT, t_fnt)
-
+    LabelBase.register(DEFAULT_FONT, t_dir)
 
     pass
     ## import japanize_kivy
