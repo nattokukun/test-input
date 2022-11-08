@@ -42,7 +42,8 @@ version = 0.1
 ### requirements = python3,kivy==master,hostpython3,android
 ### requirements = python3==3.9.12,hostpython3==3.9.12,kivy,pyjnius,android
 ### requirements = python3==3.8.9,hostpython3==3.8.9,kivy,pyjnius,android
-requirements = python3==3.8.9,hostpython3==3.8.9,kivy==2.2.0,pyjnius,android
+### requirements = python3==3.8.9,hostpython3==3.8.9,kivy==2.2.0,pyjnius,android
+requirements = python3==3.8.9,hostpython3==3.8.9,kivy==2.1.0,pyjnius,android
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
