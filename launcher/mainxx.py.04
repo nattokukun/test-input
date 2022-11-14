@@ -65,9 +65,7 @@ else:
     #######################
     import cussys
     # 外部ストレージパス(実際は内部ストレージパス)を得る
-    ## t_dir = cussys.adrd_get_external_storage_dir() + "/kivy/" + "ipaexg00401"
-    t_dir = cussys.adrd_get_external_storage_dir() + \
-            "/android/data/org.kivy.un_official_launcher/files/" + "ipaexg00401"
+    t_dir = cussys.adrd_get_external_storage_dir() + "/kivy/" + "ipaexg00401"
     t_fnt = 'ipaexg.ttf'
     t_fnt_path = t_dir + '/' + t_fnt
     ## t_dir = t_dir + 'xx'
@@ -287,4 +285,4 @@ class TestApp(App):
 #                   Run
 #---------------------------------------------------------------------------------
 ## if __name__ == '__main__':
-##     TestApp().run()
+##    TestApp().run()
