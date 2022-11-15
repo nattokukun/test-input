@@ -14,16 +14,20 @@ class Launcher(App):
 
     def build(self):
 
+        #############
+        xxx_dir = 'launcher'
+        #############
+
 
         #############
         import sys
-        sys.path.append('launcher')
+        sys.path.append(xxx_dir)
         #############
 
 
         #############
         ## kvファイルの明示的なロード
-        self.root = Builder.load_file("launcher/test.kv")
+        self.root = Builder.load_file(xxx_dir+"/"+"test.kv")
         ##self.root = Builder.load_file("test.kv")
         #############
 
