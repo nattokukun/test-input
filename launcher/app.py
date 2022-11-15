@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 
-"""
 from kivy import Config
 Config.set('graphics', 'multisamples', '0')
+
+"""
 """
 
 from kivy.app import App
