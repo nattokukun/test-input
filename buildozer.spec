@@ -2,7 +2,7 @@
 
 # (str) Title of your application
 ## title = (NTK) Kivy Launcher
-title = TestInput
+title = Test Input
 
 # (str) Package name
 ## package.name = un_official_launcher
