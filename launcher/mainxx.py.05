@@ -98,15 +98,10 @@ else:
 
     ## LabelBase.register(DEFAULT_FONT, t_dir)
 
-    """
     print('****** new set')
     resource_add_path(t_dir)
     LabelBase.register(DEFAULT_FONT, t_fnt)
-    """
-    print('****** new set 3')
-    resource_add_path("/system/fonts")
-    ## LabelBase.register(DEFAULT_FONT, "NotoSansBuhid-Regular.ttf")
-    LabelBase.register(DEFAULT_FONT, "NotoSansCJK-Regular.ttc")
+
 
     pass
     ## import japanize_kivy
@@ -291,5 +286,5 @@ class TestApp(App):
 #---------------------------------------------------------------------------------
 #                   Run
 #---------------------------------------------------------------------------------
-# if __name__ == '__main__':
-#    TestApp().run()
+## if __name__ == '__main__':
+##     TestApp().run()
