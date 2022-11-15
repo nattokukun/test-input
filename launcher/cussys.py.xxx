@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #//////////////////////////////////////////////////////////////////////////////
-#            cssys Custom System
+#            cussys Custom System
 #            M.Ida 2022.03.18
 #//////////////////////////////////////////////////////////////////////////////
 # Debug 用
@@ -15,31 +15,34 @@ Config.set('kivy', 'log_enable', 1)
 Config.set('kivy', 'log_dir', 'logs')  # 変更しなければ上でみた通り
 Config.set('kivy', 'log_name', 'kivy_%y-%m-%d_%_.txt')  # 変更しなければ上でみた通り
 
-import traceback
-import platform
-import os
-
-## import const
 #------------------------------------------------------------------------------
 #                   関数群
 #------------------------------------------------------------------------------
 # デバッグログ
 def debug_log(p_msg):
-    t_msg = p_msg .replace(':', '$')
-    t_msg = t_msg.replace('\n', ' ')
-    Logger.debug('### ' + t_msg)
+    tp_msg = p_msg .replace(':', '$')
+    tp_msg = tp_msg.replace('\n', ' ')
+    Logger.debug('### ' + tp_msg)
 
 debug_log('************** Logger debug start *************')
 
+import traceback
+import platform
+import os
+
+import const
+#------------------------------------------------------------------------------
+#                   関数群
+#------------------------------------------------------------------------------
 # Windowsであるか
 def is_windows():
     return (platform.system() == 'Windows')
 
 # Androidであるか
 def is_android():
-    t_name = platform.system()
-    ## debug_log(t_name)
-    return (t_name == 'Linux' or t_name == 'Android')
+    tp_name = platform.system()
+    ## debug_log(tp_name)
+    return (tp_name == 'Linux' or tp_name == 'Android')
 
 #------------------------------------------------------------------------------
 #                   初期処理
@@ -104,10 +107,6 @@ pass
 if gl_errmsg != '':
     raise Exception(gl_errmsg)
 
-# Windows用
-if is_windows():
-    import winsound
-
 #------------------------------------------------------------------------------
 #                   定数定義
 #------------------------------------------------------------------------------
@@ -118,49 +117,49 @@ if is_android():
     ANDROID_11 = 30
 
 # 要求コードは任意でユニーク
-REQUEST_ACCESS_STORAGE = 101
+const.REQUEST_ACCESS_STORAGE = 101
 
 
 #------------------------------------------------------------------------------
-#                   関数・クラス群
+#                   関数群
 #------------------------------------------------------------------------------
 
 # OpenGLの調整
-def adjust_opengl(p_python_ver,                     # pythonバージョンNo
-                  p_size_to_android_style=False):   # サイズをandroid風にする
+def adjust_opengl(p_python_ver):    # pythonバージョンNo
     """
         OpenGLが2.0以上にも関わらず、当該認識をしない場合は、
                 Python 3    (A)〇 (B)×
                 Python 2    (A)× (B)〇
     """
     if not is_windows():
-        # Windows以外は抜ける
         return
 
     if p_python_ver == 3:
-        # OpenGL2.0 を認識しない場合
-        os.environ ['KIVY_GL_BACKEND'] = 'angle_sdl2'
+        ## (A)
+        ## if platform.system() == 'Windows':
+        if is_windows():
+            # OpenGL2.0 を認識しない場合
+            os.environ ['KIVY_GL_BACKEND'] = 'angle_sdl2'
+        return
 
     if p_python_ver == 2:
-        # OpenGL2.0 を認識しない場合
-        from kivy import Config
-        Config.set('graphics', 'multisamples', '0')
-
-    if p_size_to_android_style:
-        # サイズをandroid風にする
-        SHIRINK = 0.37
-        from kivy.core.window import Window
-        Window.size = (1080 * SHIRINK, 1920 * SHIRINK)
+        ## (B)
+        ## if platform.system() == 'Windows':
+        if is_windows():
+            # OpenGL2.0 を認識しない場合
+            from kivy import Config
+            Config.set('graphics', 'multisamples', '0')
+        return
 
 # 外部ストレージパス(実際は内部ストレージパス)を得る
-def adr_get_external_storage_dir():    # 外部ストレージパス
-    t_environment = autoclass('android.os.Environment')
-    t_dir = t_environment.getExternalStorageDirectory()
+def adrd_get_external_storage_dir():    # 外部ストレージパス
+    tp_environment = autoclass('android.os.Environment')
+    tp_dir = tp_environment.getExternalStorageDirectory()
     # print('******')
-    t_str = t_dir.getAbsolutePath()
-    # print(t_str)
+    tp_str = tp_dir.getAbsolutePath()
+    # print(tp_str)
     # print('******')
-    return t_str
+    return tp_str
 
 # callback 処理クラス
 class RequestPermission:
@@ -175,17 +174,17 @@ class RequestPermission:
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     def callback(self, p_permissions, p_grants):
         debug_log('on_request_permission_callback start')
-        t_ok = True
-        for t_grant in p_grants:
-            if t_grant == permissions.PERMISSION_GRANTED:
+        tp_ok = True
+        for tp_grant in p_grants:
+            if tp_grant == permissions.PERMISSION_GRANTED:
             # 許可
                 pass
-            if t_grant == permissions.PERMISSION_DENIED:
+            if tp_grant == permissions.PERMISSION_DENIED:
             # 拒否
-                t_ok = False
+                tp_ok = False
                 break
 
-        if not t_ok:
+        if not tp_ok:
         # 全て許可されない
             self.result = False
         else:
@@ -194,77 +193,77 @@ class RequestPermission:
         debug_log('on_request_permission_callback end')
 
 # 複数権限を点検する
-def adr_check_permissions(p_permissions):   # 権限
-                                            # True:全て
-    t_ok = True
-    for t_permission in p_permissions:
-        if not check_permission(t_permission):
-            t_ok = False
+def adrd_check_permissions(p_permissions):  # 権限
+                                                # True:全て
+    tp_ok = True
+    for tp_permission in p_permissions:
+        if not check_permission(tp_permission):
+            tp_ok = False
             break
-    return t_ok
+    return tp_ok
 
 # 複数権限を得る
-def adr_check_request_permissions(p_permissions):   # 権限
-                                                    # True:許可
+def adrd_check_request_permissions(p_permissions):  # 権限
+                                                        # True:許可
     debug_log('start check request permission')
     # 点検
-    t_ok = adr_check_permissions(p_permissions)
-    ##    t_ok = False # 以下実行するためのテスト用
-    if t_ok:
+    tp_ok = adrd_check_permissions(p_permissions)
+    ##    tp_ok = False # 以下実行するためのテスト用
+    if tp_ok:
     # 許可有
         debug_log('check permission ok')
     else:
     # 許可無
         debug_log('check permission None')
 
-        t_request_permission = RequestPermission()
+        tp_request_permission = RequestPermission()
         # 許可を得る
         debug_log('  permission start')
-        request_permissions(p_permissions, t_request_permission.callback)
+        request_permissions(p_permissions, tp_request_permission.callback)
         debug_log('  permission end')
 
         while True:
-            if t_request_permission.result != None:
+            if tp_request_permission.result != None:
                 break
 
     debug_log('permission return')
     return True
 
 # ファイル書き込みテスト
-def test_adr_file_write(p_dir_doc,          # 場所
-                           p_file_name):    # ファイル名
+def test_adrd_file_write(p_dir_doc,         # 場所
+                            p_file_name):   # ファイル名
                                             # エラーメッセージ '':成功
-    debug_log('filetest_adr_file_write start :' + p_file_name)
+    debug_log('filetest_adrd_file_write start :' + p_file_name)
     try:
-        t_file_doc = p_dir_doc.createFile('text/plain', p_file_name)
-        t_resolver = mActivity.getContentResolver()
-        t_outstrm  = t_resolver.openOutputStream(t_file_doc.uri) ## t_uri) ## t_file_doc)
-        t_outstrm.write(bytearray(b'hoge'))
-        t_outstrm.close()
-        t_errmsg = ''
+        tp_file_doc = p_dir_doc.createFile('text/plain', p_file_name)
+        tp_resolver = mActivity.getContentResolver()
+        tp_outstrm  = tp_resolver.openOutputStream(tp_file_doc.uri) ## tp_uri) ## tp_file_doc)
+        tp_outstrm.write(bytearray(b'hoge'))
+        tp_outstrm.close()
+        tp_errmsg = ''
     except:
-        t_errmsg = 'test_adr_file_write ' + '\n' + \
+        tp_errmsg = 'test_adrd_file_write ' + '\n' + \
                     traceback.format_exc()
 
-    debug_log('filetest_adr_file_write end')
-    return t_errmsg
+    debug_log('filetest_adrd_file_write end')
+    return tp_errmsg
 
 # ストレージ検証
-def test_adr_storage():
+def test_adrd_storage():
     # StorageManager    STORAGE_SERVICE
-    t_sto_mng = mActivity.getSystemService(Context.STORAGE_SERVICE)
+    tp_sto_mng = mActivity.getSystemService(Context.STORAGE_SERVICE)
 
-    # t_sto_vols = t_sto_mng.getRecentStorageVolumes()
-    t_sto_vols = t_sto_mng.getStorageVolumes()
-    for t_str_vol in t_sto_vols:
-        print('a1 :' + t_str_vol.toString())
+    # tp_sto_vols = tp_sto_mng.getRecentStorageVolumes()
+    tp_sto_vols = tp_sto_mng.getStorageVolumes()
+    for tp_str_vol in tp_sto_vols:
+        print('a1 :' + tp_str_vol.toString())
         ## getDescription(Context context)
-        print('a2 :' + t_str_vol.getDescription(mActivity))
+        print('a2 :' + tp_str_vol.getDescription(mActivity))
         ## getMediaStoreVolumeName()
-        ## print('a3 :' + t_str_vol.getMediaStoreVolumeName())  # error
+        ## print('a3 :' + tp_str_vol.getMediaStoreVolumeName())  # error
 
-    t_sto_vol = t_sto_mng.getPrimaryStorageVolume()
-    print('b :' + t_str_vol.toString())
+    tp_sto_vol = tp_sto_mng.getPrimaryStorageVolume()
+    print('b :' + tp_str_vol.toString())
     return
 
 # callback 処理クラス
@@ -283,47 +282,47 @@ class RequestAccessCallback_7_9:
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     def on_activity_result(self, p_request_code, p_result_code, p_intent):
         debug_log('on_activity_result start')
-        t_end = False
-        if p_request_code == self.wait_request_code: # REQUEST_ACCESS_STORAGE:
+        tp_end = False
+        if p_request_code == self.wait_request_code: # const.REQUEST_ACCESS_STORAGE:
         # 当該リクエスト
             if p_result_code  == Activity.RESULT_OK:
                 # 許可を保存
-                t_uri = p_intent.getData()
-                t_resolver = mActivity.getContentResolver()
-                t_resolver.takePersistableUriPermission(t_uri,
-                                                        Intent.FLAG_GRANT_READ_URI_PERMISSION or
-                                                        Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+                tp_uri = p_intent.getData()
+                tp_resolver = mActivity.getContentResolver()
+                tp_resolver.takePersistableUriPermission(tp_uri,
+                                                         Intent.FLAG_GRANT_READ_URI_PERMISSION or
+                                                         Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
                 """ ##
                 # ファイル書き込みテスト
-                t_errmsg = test_adr_file_write(t_uri, 'xx1')
-                if t_errmsg != '':
-                    raise t_errmsg
+                tp_errmsg = test_adrd_file_write(tp_uri, 'xx1')
+                if tp_errmsg != '':
+                    raise tp_errmsg
 
                 # ファイル書き込みテスト
-                t_errmsg = test_adr_file_write(t_uri, 'xx2')
-                if t_errmsg != '':
-                    raise t_errmsg
+                tp_errmsg = test_adrd_file_write(tp_uri, 'xx2')
+                if tp_errmsg != '':
+                    raise tp_errmsg
                 ## """
                 # uri sd 保存
-                self.uri = t_uri
+                self.uri = tp_uri
                 debug_log('on_activity_result ok!')
-                t_result = True
+                tp_result = True
             else:
                 # 拒否処理
                 debug_log('on_activity_result cancel!')
-                t_result = False
+                tp_result = False
 
-            t_end = True
+            tp_end = True
         else:
             debug_log('on_activity_result not request')
 
-        if t_end:
+        if tp_end:
             # バインド解除
             debug_log('on_activity_result unbind')
             activity.unbind(on_activity_result=self.on_activity_result)
 
-        if t_end:
-            self.result = t_result
+        if tp_end:
+            self.result = tp_result
         debug_log('on_activity_result return')
 
 # callback 処理クラス
@@ -342,85 +341,85 @@ class RequestAccessCallback_10_11:
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     def on_activity_result(self, p_request_code, p_result_code, p_intent):
         debug_log('on_activity_result start')
-        t_end = False
-        if p_request_code == self.wait_request_code: # REQUEST_ACCESS_STORAGE:
+        tp_end = False
+        if p_request_code == self.wait_request_code: # const.REQUEST_ACCESS_STORAGE:
         # 当該リクエスト
 
             # 以下のifをTrueにする
             p_result_code = Activity.RESULT_OK
             if p_result_code  == Activity.RESULT_OK:
                 # 許可を保存
-                t_uri = p_intent.getData()
+                tp_uri = p_intent.getData()
 
-                t_take_flag = (Intent.FLAG_GRANT_READ_URI_PERMISSION or
-                               Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+                tp_take_flag = (Intent.FLAG_GRANT_READ_URI_PERMISSION or
+                                Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
 
-                t_resolver = mActivity.getContentResolver()
-                t_resolver.takePersistableUriPermission(t_uri, t_take_flag)
+                tp_resolver = mActivity.getContentResolver()
+                tp_resolver.takePersistableUriPermission(tp_uri, tp_take_flag)
 
                 # uri sd 保存
-                self.uri = t_uri
+                self.uri = tp_uri
                 debug_log('on_activity_result ok!')
-                t_result = True
+                tp_result = True
             else:
                 # 拒否処理
                 debug_log('on_activity_result cancel!')
-                t_result = False
+                tp_result = False
 
-            t_end = True
+            tp_end = True
         else:
         # 当該リクエストではない
             debug_log('on_activity_result not request')
 
-        if t_end:
+        if tp_end:
             # バインド解除
             debug_log('on_activity_result unbind')
             activity.unbind(on_activity_result=self.on_activity_result)
 
-        if t_end:
-            self.result = t_result
+        if tp_end:
+            self.result = tp_result
         debug_log('on_activity_result return')
 
 
 # uri から DocumentFile を得る
-def uri_to_doc(p_uri):
+def get_doc_by_uri(p_uri):
                                 # :DocumentFile =None:エラー
-    ROUTIN = 'uri_to_doc : '
+    ROUTIN = 'get_doc_by_uri : '
     # : が存在する場合を SD とする
-    t_sd_fuu = ':' in p_uri.getPath()
+    tp_sd_fuu = ':' in p_uri.getPath()
     """
-    if t_sd_fuu:
-        debug_log('uri_to_doc : This is SD')
+    if tp_sd_fuu:
+        debug_log('get_doc_by_uri : This is SD')
     else:
-        debug_log('uri_to_doc : This is not SD')
+        debug_log('get_doc_by_uri : This is not SD')
     """
-    if not t_sd_fuu:
-        t_file = File(p_uri.getPath())
-        t_doc = DocumentFile.fromFile(t_file)
+    if not tp_sd_fuu:
+        tp_file = File(p_uri.getPath())
+        tp_doc = DocumentFile.fromFile(tp_file)
     else:
         if p_uri.getScheme() == 'file':
         # SDなのに file の場合は、未対応とする
             """
             # 変換する.. 以下上手くいかない
-            t_File = File(p_uri.getPath())
-            t_context = Context.getApplicationContext()
-            t_uri = FileProvider.getUriForFile(mActivity, \
-                                                t_context.getPackageName() + ".provider", \
-                                                t_File)
-            p_uri = t_uri
+            tp_File = File(p_uri.getPath())
+            tp_context = Context.getApplicationContext()
+            tp_uri = FileProvider.getUriForFile(mActivity, \
+                                                tp_context.getPackageName() + ".provider", \
+                                                tp_File)
+            p_uri = tp_uri
             """
-            t_doc = None
+            tp_doc = None
             raise Exception(ROUTIN + 'this uri not supported!' + p_uri.getPath())
         else:
         # context
-            ## t_file = File(p_uri.getPath())
-            t_doc = DocumentFile.fromTreeUri(mActivity, p_uri)
+            ## tp_file = File(p_uri.getPath())
+            tp_doc = DocumentFile.fromTreeUri(mActivity, p_uri)
     pass
-    return t_doc
+    return tp_doc
 
 # ディレクトリアクセス権要求するintent生成
 def create_open_doctree_intent(p_volume):   # volume
-                                            # intent
+                                                # intent
     ROUTIN = 'create_open_doctree_intent : '
 
     if VERSION.SDK_INT >= ANDROID_7:
@@ -434,81 +433,52 @@ def create_open_doctree_intent(p_volume):   # volume
     if VERSION.SDK_INT >= ANDROID_10:
     # Android 10 以上
     #  権限の記憶ができない？
-        t_intent = p_volume.createOpenDocumentTreeIntent()
+        tp_intent = p_volume.createOpenDocumentTreeIntent()
     else:
     # Android 10 未満
-        t_intent = p_volume.createAccessIntent(None) # None:root
+        tp_intent = p_volume.createAccessIntent(None) # None:root
 
-    return t_intent
+    return tp_intent
 
 # SDカード uriを得る
 def get_sd_uri():
                     # sd_uri ルート
 
     ROUTIN = 'get_sd_uri : '
-    t_storage_manager = mActivity.getSystemService(Context.STORAGE_SERVICE)
+    tp_storage_manager = mActivity.getSystemService(Context.STORAGE_SERVICE)
 
     # 全ボリュームを得る
-    t_storageVolumes = t_storage_manager.storageVolumes
+    tp_storageVolumes = tp_storage_manager.storageVolumes
 
-    t_uri = None
+    tp_uri = None
     # 全ボリュームループ
-    for t_volume in t_storageVolumes:
-        if (t_volume.getUuid() != None) and t_volume.isRemovable:
+    for tp_volume in tp_storageVolumes:
+        if (tp_volume.getUuid() != None) and tp_volume.isRemovable:
             """ 7-9 NG
-            t_file = t_volume.getDirectory()
-            t_uri = Uri.fromFile(t_file)
-            #####################
-            上記は NG でああるが、ここに入ってくれば SDは存在するのは分かる
-            #####################
+            tp_file = tp_volume.getDirectory()
+            tp_uri = Uri.fromFile(tp_file)
             """
             android_version = AndroidVersion()
             if android_version.is_10_11:
-                t_file = t_volume.getDirectory()
-                t_uri = Uri.fromFile(t_file)
+                tp_file = tp_volume.getDirectory()
+                tp_uri = Uri.fromFile(tp_file)
             else:
                 """
-                print('*** ' + t_volume.getUuid())
+                print('*** ' + tp_volume.getUuid())
                 """
                 """
-                t_file = File('/storage/' + t_volume.getUuid() + '/')
-                t_uri = Uri.fromFile(t_file)
-                t_doc = uri_to_doc(t_uri)
-                t_uri = t_doc.getUri()
+                tp_file = File('/storage/' + tp_volume.getUuid() + '/')
+                tp_uri = Uri.fromFile(tp_file)
+                tp_doc = get_doc_by_uri(tp_uri)
+                tp_uri = tp_doc.getUri()
                 """
                 raise Exception(ROUTIN + 'android version not supported!')
             break
         pass
 
-    return t_uri
+    return tp_uri
 
-# ストレージアクセス許可を得る
-def request_access_storage():
-                                        # True:許可(Win:True)
-                                        # SDカードuri(Android 7～9)
-    t_sd_uri = None
-    if is_android():
-        t_adr_ver = AndroidVersion()
-        if t_adr_ver.is_10_11:
-        # Android 10 以上
-        # SDカードは許可されているが、Android/data 内が読めない
-            t_access_ok = request_access_storage_10_11()
-        else:
-        # Android 10 未満
-        # SDカードの許可が必要
-            t_access_ok, t_sd_uri = request_access_storage_7_9()
-        """
-        if not t_access_ok:
-            raise Exception('request_access_storage　: Access Error!')
-        """
-        debug_log('request_access_storage completed')
-    else:
-    # android以外
-        t_access_ok = True
-
-    return t_access_ok, t_sd_uri
-
-# ストレージアクセス許可を得る
+# アクセス権を得る
 # Android 7～9
 def request_access_storage_7_9():
                                         # True:許可
@@ -516,8 +486,8 @@ def request_access_storage_7_9():
 
     p_fix = False # True:固定ストレージ False:取外ストレージ
 
-    t_ok  = False
-    t_uri = None
+    tp_ok  = False
+    tp_uri = None
 
     if p_fix:
     # 固定は非対応
@@ -525,89 +495,89 @@ def request_access_storage_7_9():
 
     debug_log('get system service')
     # StorageManager    STORAGE_SERVICE
-    t_storage_manager = mActivity.getSystemService(Context.STORAGE_SERVICE)
+    tp_storage_manager = mActivity.getSystemService(Context.STORAGE_SERVICE)
 
     # 全ボリュームを得る
-    t_storageVolumes = t_storage_manager.storageVolumes
+    tp_storageVolumes = tp_storage_manager.storageVolumes
 
-    # t_volume : android.os.storage.StorageVolume
+    # tp_volume : android.os.storage.StorageVolume
     # https://developer.android.com/reference/android/os/storage/StorageVolume
     # https://android-googlesource-com.translate.goog/platform/frameworks/base/+/master/core/java/android/os/storage/StorageVolume.java?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=ja&_x_tr_pto=op,sc
 
-    t_request = False
+    tp_request = False
     # 全ボリュームループ
-    for t_volume in t_storageVolumes:
-        t_ok = False
+    for tp_volume in tp_storageVolumes:
+        tp_ok = False
         """
-        if t_volume.getUuid() != None:
+        if tp_volume.getUuid() != None:
         # 有効
-            if p_fix and (not t_volume.isRemovable):
-                t_ok = True
+            if p_fix and (not tp_volume.isRemovable):
+                tp_ok = True
             else:
-                if (not p_fix) and t_volume.isRemovable:
-                    t_ok = True
+                if (not p_fix) and tp_volume.isRemovable:
+                    tp_ok = True
         """
         """
-        if p_fix and (not t_volume.isRemovable):
-            t_ok = True
+        if p_fix and (not tp_volume.isRemovable):
+            tp_ok = True
         else:
-            if (not p_fix) and t_volume.isRemovable:
-                t_ok = True
+            if (not p_fix) and tp_volume.isRemovable:
+                tp_ok = True
         """
         # 注意！固定ストレージが上手くいかない
-        if p_fix and (t_volume.getUuid() != None) and (not t_volume.isRemovable):
+        if p_fix and (tp_volume.getUuid() != None) and (not tp_volume.isRemovable):
             ## ここが上手くとれない
-            t_ok = True
+            tp_ok = True
         else:
-            if (not p_fix) and (t_volume.getUuid() != None) and t_volume.isRemovable:
-                t_ok = True
+            if (not p_fix) and (tp_volume.getUuid() != None) and tp_volume.isRemovable:
+                tp_ok = True
 
-        debug_log('one volume proc : ' + t_volume.getState())
-        ## t_file = t_volume.getDirectory()
-        ## debug_log('one volume proc : ' + t_file.getName())
-        ## debug_log('one volume proc : ' + t_volume.getMediaStoreVolumeName())
+        debug_log('one volume proc : ' + tp_volume.getState())
+        ## tp_file = tp_volume.getDirectory()
+        ## debug_log('one volume proc : ' + tp_file.getName())
+        ## debug_log('one volume proc : ' + tp_volume.getMediaStoreVolumeName())
 
         """
-        if (t_volume.isRemovable and
-            t_volume.getUuid() != None):
+        if (tp_volume.isRemovable and
+            tp_volume.getUuid() != None):
         # SDカードである
         """
-        if t_ok:
+        if tp_ok:
         # 当該ボリューム
-            t_request = True
+            tp_request = True
             """ ##
-            t_msg = t_volume.getUuid() + ' | ' + t_volume.toString()
-            debug_log('volume removable : ' + t_msg)
+            tp_msg = tp_volume.getUuid() + ' | ' + tp_volume.toString()
+            debug_log('volume removable : ' + tp_msg)
             ## """
-            debug_log('volume ok : ' + t_volume.toString())
+            debug_log('volume ok : ' + tp_volume.toString())
 
 
             # ディレクトリアクセス権要求する intent 生成
-            ## t_intent = t_volume.createAccessIntent(None) # None:root
-            t_intent = create_open_doctree_intent(t_volume)
+            ## tp_intent = tp_volume.createAccessIntent(None) # None:root
+            tp_intent = create_open_doctree_intent(tp_volume)
 
             # コールバッククラスインスタンス作成
-            t_request_access = RequestAccessCallback_7_9(REQUEST_ACCESS_STORAGE)
+            tp_request_access = RequestAccessCallback_7_9(const.REQUEST_ACCESS_STORAGE)
             # 発行のコールバックをセット
             # スレッドの重複はクラスが見つけられない場合有り
             # https://issuehint.com/issue/kivy/python-for-android/2533
             debug_log('bind start')
-            activity.bind(on_activity_result = t_request_access.on_activity_result)
+            activity.bind(on_activity_result = tp_request_access.on_activity_result)
             debug_log('bind end')
 
             # intent 発行
             debug_log('startActivityForResult')
-            mActivity.startActivityForResult(t_intent, REQUEST_ACCESS_STORAGE)
+            mActivity.startActivityForResult(tp_intent, const.REQUEST_ACCESS_STORAGE)
 
             # 許可の応答を待つ
             debug_log('request_access wait start')
             while True:
-                if t_request_access.result != None:
+                if tp_request_access.result != None:
                 # 結果が入った
-                    if t_request_access.result:
+                    if tp_request_access.result:
                     # 許可
-                        t_ok  = True
-                        t_uri = t_request_access.uri
+                        tp_ok  = True
+                        tp_uri = tp_request_access.uri
                     break
                 else:
                     # wait
@@ -616,12 +586,12 @@ def request_access_storage_7_9():
             break
         else:
         # 当該ボリューム以外
-            debug_log('volume skip : ' + t_volume.toString())
+            debug_log('volume skip : ' + tp_volume.toString())
 
-    if not t_request:
-        raise Exception('No request access storage! (not found SD drive)')
+    if not tp_request:
+        raise Exception('No request access storage!')
 
-    return t_ok, t_uri
+    return tp_ok, tp_uri
 
 class RequestAccessActiviry_10_11():
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -647,69 +617,69 @@ class RequestAccessActiviry_10_11():
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     def check_if_got_access(self):
         # 権限があるか探す
-        t_ret = False
-        t_resolver = mActivity.getContentResolver()
-        for t_uri_permission in t_resolver.getPersistedUriPermissions():   # PersistedUriPermissions:
-            t_uri = t_uri_permission.getUri()
+        tp_ret = False
+        tp_resolver = mActivity.getContentResolver()
+        for tp_uri_permission in tp_resolver.getPersistedUriPermissions():   # PersistedUriPermissions:
+            tp_uri = tp_uri_permission.getUri()
             """ ##
             print('permission loop')
-            print(t_uri.getPath())
+            print(tp_uri.getPath())
             ## """
-            t_ret = (t_uri.equals(self.android_tree_uri) and
-                                                t_uri_permission.isReadPermission and
-                                                t_uri_permission.isWritePermission
+            tp_ret = (tp_uri.equals(self.android_tree_uri) and
+                                                tp_uri_permission.isReadPermission and
+                                                tp_uri_permission.isWritePermission
                         )
-            if t_ret:
+            if tp_ret:
             # 見つかった
                 break
-        return t_ret
+        return tp_ret
 
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     #            execute
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     def execute(self):  ## open_directory(self):
         """ ## for debug
-        t_ok = False
-        if t_ok:
+        tp_ok = False
+        if tp_ok:
         ## """
         if self.check_if_got_access():
             self.on_got_permission()
         else:
         # 許可を得る
             # StorageManager    STORAGE_SERVICE
-            t_storage_manager = mActivity.getSystemService(Context.STORAGE_SERVICE)
+            tp_storage_manager = mActivity.getSystemService(Context.STORAGE_SERVICE)
             # ボリュームを得る
-            t_primary_storage_volume = t_storage_manager.getPrimaryStorageVolume()
+            tp_primary_storage_volume = tp_storage_manager.getPrimaryStorageVolume()
 
-            t_intent = t_primary_storage_volume.createOpenDocumentTreeIntent()
-            t_parcelable = cast('android.os.Parcelable', self.android_uri)
-            t_intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, t_parcelable)
-            ## t_intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, self.android_uri)
+            tp_intent = tp_primary_storage_volume.createOpenDocumentTreeIntent()
+            tp_parcelable = cast('android.os.Parcelable', self.android_uri)
+            tp_intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, tp_parcelable)
+            ## tp_intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, self.android_uri)
 
             # コールバッククラスインスタンス作成
-            t_request_access = RequestAccessCallback_10_11(REQUEST_ACCESS_STORAGE)
+            tp_request_access = RequestAccessCallback_10_11(const.REQUEST_ACCESS_STORAGE)
             # 発行のコールバックをセット
-            activity.bind(on_activity_result = t_request_access.on_activity_result)
+            activity.bind(on_activity_result = tp_request_access.on_activity_result)
             # intent 発行
             debug_log('startActivityForResult')
-            mActivity.startActivityForResult(t_intent, REQUEST_ACCESS_STORAGE)
+            mActivity.startActivityForResult(tp_intent, const.REQUEST_ACCESS_STORAGE)
 
             # 許可の応答を待つ
             debug_log('request_access wait start')
-            t_ok = False
+            tp_ok = False
             while True:
-                if t_request_access.result != None:
+                if tp_request_access.result != None:
                 # 結果が入った
-                    if t_request_access.result:
+                    if tp_request_access.result:
                     # 許可
-                        t_ok  = True
+                        tp_ok  = True
                     break
                 else:
                     # wait
                     pass
             debug_log('request_access wait end')
 
-            if not t_ok:
+            if not tp_ok:
                 debug_log("you didn't grant permission to the correct folder(1)")
                 return
 
@@ -727,14 +697,14 @@ class RequestAccessActiviry_10_11():
         debug_log("called 'on_got_permission'")
         pass
 
-# ストレージアクセス許可を得る
+# アクセス権を得る
 # Android 10～11
 def request_access_storage_10_11():
                                         # True:許可
 
-    t_request = RequestAccessActiviry_10_11()
-    t_request.execute()    ## open_directory()
-    return t_request.got_permission
+    tp_request = RequestAccessActiviry_10_11()
+    tp_request.execute()    ## open_directory()
+    return tp_request.got_permission
 
 # androidバージョンクラス
 class AndroidVersion():
@@ -763,49 +733,19 @@ class AndroidVersion():
             self.is_7_9   = True
         return
 
-# beep (windows)
-def win_beep(p_sec):    # 秒
-    if is_windows():
-        t_frequency = 500   # Hz ex.2000
-        t_duration  = int(1000 * p_sec) # sec
-        winsound.Beep(t_frequency, t_duration)
-
 # バイブを鳴らす
-def adr_vib(p_sec):     # 秒
+def adrd_vib(p_sec):    # 秒
     if not is_android():
         return
     """
-    ## t_python_activity = autoclass('org.renpy.android.PythonActivity')
-    t_python_activity = autoclass('org.kivy.android.PythonActivity')
-    t_activity = t_python_activity.mActivity
+    ## tp_python_activity = autoclass('org.renpy.android.PythonActivity')
+    tp_python_activity = autoclass('org.kivy.android.PythonActivity')
+    tp_activity = tp_python_activity.mActivity
 
-    t_context = autoclass('android.content.Context')
-    t_vibrator = t_activity.getSystemService(t_context.VIBRATOR_SERVICE)
-    t_vibrator.vibrate(1000) # 1秒
+    tp_context = autoclass('android.content.Context')
+    tp_vibrator = tp_activity.getSystemService(tp_context.VIBRATOR_SERVICE)
+    tp_vibrator.vibrate(1000) # 1秒
     """
-    t_vibrator = mActivity.getSystemService(Context.VIBRATOR_SERVICE)
-    t_vibrator.vibrate(p_sec * 1000) # 秒
+    tp_vibrator = mActivity.getSystemService(Context.VIBRATOR_SERVICE)
+    tp_vibrator.vibrate(p_sec * 1000) # 秒
     return
-
-# boo (windows : ブザー android : バイブ)
-def boo(p_sec = 0.2):   # 秒
-    if is_android():
-        """
-        from jnius import autoclass
-        AudioManager = autoclass("android.media.AudioManager")
-        ToneGenerator = autoclass("android.media.ToneGenerators")
-        toneGenerator = ToneGenerator(AudioManager.STREAM_SYSTEM, ToneGenerator.MAX_VOLUME)
-        toneGenerator.startTone(ToneGenerator.TONE_PROP_BEEP);
-        """
-        # バイブを鳴らす
-        adr_vib(p_sec)
-
-    if is_windows():
-        """
-        import winsound
-        t_frequency = 500   # Hz ex.2000
-        t_duration  = int(1000 * p_sec) # sec
-        winsound.Beep(t_frequency, t_duration)
-        """
-        # beep (windows)
-        win_beep(p_sec)
