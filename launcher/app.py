@@ -5,11 +5,12 @@ xxx_dir = 'launcher'
 import sys
 sys.path.append(xxx_dir)
 
+"""
 ## kvファイルの明示的なロード
 from kivy.lang import Builder
 ## self.root = Builder.load_file(xxx_dir+"/"+"test.kv")
 Builder.load_file(xxx_dir+"/"+"test.kv")
-
+"""
 
 
 
@@ -23,11 +24,11 @@ class Launcher(App):
 
         import sys
         sys.path.append(xxx_dir)
+        """
 
         ## kvファイルの明示的なロード
         from kivy.lang import Builder
         self.root = Builder.load_file(xxx_dir+"/"+"test.kv")
-        """
 
         from mainxx import MainForm
         tp_mf = MainForm()
