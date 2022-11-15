@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
+"""
 from kivy import Config
 Config.set('graphics', 'multisamples', '0')
 
-"""
 """
 
 from kivy.app import App
@@ -12,7 +12,7 @@ from kivy.app import App
 class Launcher(App):
     def build(self):
 
-	xxx_dir = 'launcher'
+        xxx_dir = 'launcher'
 
         import sys
         ## sys.path.append('launcher')
