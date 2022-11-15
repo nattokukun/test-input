@@ -18,6 +18,7 @@ class Launcher(App):
         xxx_dir = 'launcher'
         #############
 
+
         #############
         import sys
         sys.path.append(xxx_dir)
@@ -29,6 +30,13 @@ class Launcher(App):
         self.root = Builder.load_file(xxx_dir+"/"+"test.kv")
         ##self.root = Builder.load_file("test.kv")
         #############
+
+
+        ## print('[1]')
+        ## return Label(text="Hello World")
+
+        #############
+        # from launcher.app import Launcher
 
         from mainxx import MainForm
         tp_mf = MainForm()
