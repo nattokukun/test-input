@@ -9,13 +9,11 @@ import sys
 sys.path.append(xxx_dir)
 #######################
 
-"""
 #######################
 ## kvファイルの明示的なロード
 from kivy.lang import Builder
 Builder.load_file(xxx_dir+"/"+"main.kv")
 #######################
-"""
 
 
 def run_entrypoint(entrypoint):

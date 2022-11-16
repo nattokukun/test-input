@@ -2,10 +2,12 @@
 
 from kivy.app import App
 
+"""
 #######################
 # ソースフォルダ
 xxx_dir = 'apps'
 #######################
+"""
 
 """
 #######################
@@ -14,13 +16,13 @@ sys.path.append(xxx_dir)
 #######################
 """
 
-
-
+"""
 #######################
 ## kvファイルの明示的なロード
 from kivy.lang import Builder
 Builder.load_file(xxx_dir+"/"+"main.kv")
 #######################
+"""
 
 
 class Apps(App):
