@@ -1,32 +1,16 @@
 # -*- coding: utf-8 -*-
 
-#######
-from kivy.lang import Builder
-#######
-
-"""
-from kivy import Config
-Config.set('graphics', 'multisamples', '0')
-"""
-
 from kivy.app import App
-### from kivy.uix.label import Label
 
-#############
+# ソースフォルダ
 xxx_dir = 'apps'
-#############
 
-#############
 import sys
 sys.path.append(xxx_dir)
-#############
 
-#############
 ## kvファイルの明示的なロード
+from kivy.lang import Builder
 Builder.load_file(xxx_dir+"/"+"main.kv")
-## self.root = Builder.load_file(xxx_dir+"/"+"test.kv")
-##self.root = Builder.load_file("test.kv")
-#############
 
 class Apps(App):
 
@@ -34,7 +18,5 @@ class Apps(App):
 
         from mainxx import MainForm
         tp_mf = MainForm()
-        ## tp_mf.form_init()
         return tp_mf
-        #############
 
