@@ -1,29 +1,27 @@
 # -*- coding: utf-8 -*-
 
-
-#######################
+##----------------------------------------------------##
+##          　　　　　ローカル定義
+##----------------------------------------------------##
 # ソースフォルダ
-xxx_dir = 'apps'
+apps_dir = 'apps'
 
+# ソースフォルダを設定
 import sys
-sys.path.append(xxx_dir)
-#######################
+sys.path.append(apps_dir)
 
-#######################
-## kvファイルの明示的なロード
+# kvファイルの明示的なロード
 from kivy.lang import Builder
-Builder.load_file(xxx_dir+"/"+"main.kv")
-#######################
+Builder.load_file(apps_dir+"/"+"main.kv")
 
-##########################
+# Appの定義
 from kivy.app import App
 class Apps(App):
     def build(self):
         from mainxx import MainForm
         tp_mf = MainForm()
         return tp_mf
-##########################
-
+##----------------------------------------------------##
 
 def run_entrypoint(entrypoint):
     import runpy
@@ -35,10 +33,12 @@ def run_entrypoint(entrypoint):
         entrypoint,
         run_name="__main__")
 
-
-def run_app(tb=None):
-    #### from apps.app import Apps
-    Apps().run()
+##----------------------------------------------------##
+##          　　　　　コメント
+##----------------------------------------------------##
+## def run_app(tb=None):
+##     from apps.app import Apps
+##     Apps().run()
 
 
 def dispatch():
@@ -79,8 +79,11 @@ def dispatch():
         import traceback
         traceback.print_exc()
 
-    run_app()
-
+    ##----------------------------------------------------##
+    ##          　　　改修
+    ##----------------------------------------------------##
+    ## run_app()
+    Apps().run()
 
 if __name__ == "__main__":
     dispatch()
