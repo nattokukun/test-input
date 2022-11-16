@@ -12,9 +12,9 @@ def run_entrypoint(entrypoint):
         run_name="__main__")
 
 
-def run_app(tb=None):
-    from apps.app import Apps
-    Apps().run()
+def run_launcher(tb=None):
+    from launcher.app import Launcher
+    Launcher().run()
 
 
 def dispatch():
@@ -55,7 +55,7 @@ def dispatch():
         import traceback
         traceback.print_exc()
 
-    run_app()
+    run_launcher()
 
 
 if __name__ == "__main__":

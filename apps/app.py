@@ -13,7 +13,7 @@ from kivy.app import App
 ### from kivy.uix.label import Label
 
 #############
-xxx_dir = 'launcher'
+xxx_dir = 'apps'
 #############
 
 #############
@@ -23,22 +23,18 @@ sys.path.append(xxx_dir)
 
 #############
 ## kvファイルの明示的なロード
-Builder.load_file(xxx_dir+"/"+"test.kv")
+Builder.load_file(xxx_dir+"/"+"main.kv")
 ## self.root = Builder.load_file(xxx_dir+"/"+"test.kv")
 ##self.root = Builder.load_file("test.kv")
 #############
 
-class Launcher(App):
+class Apps(App):
 
     def build(self):
 
-
-
-
-
         from mainxx import MainForm
         tp_mf = MainForm()
-        tp_mf.form_init()
+        ## tp_mf.form_init()
         return tp_mf
         #############
 

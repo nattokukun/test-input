@@ -1,3 +1,0 @@
-title=input test
-author=Masahiro Ida
-orientation=portrait
