@@ -1,0 +1,23 @@
+Launcherからの移行方法
+【確認】
+Launcher上
+	main.kv
+	main.py
+	メインフォームは MainFormクラスとする
+
+【移行】
+appsフォルダにソース全コピー
+	main.py → mainxx.py 改名
+	mainxx.pyの以下をコメントアウト
+		#if __name__ == '__main__':
+		#    MainApp().run()
+
+以下ファイルのbranchesの確認・修正
+	gitwork\test-input\.github\workflows\main.yaml
+
+以下ファイルbuildozer.specの確認・修正
+	title = Test Input
+	package.name = test_input
+	version = 0.1
+
+以上

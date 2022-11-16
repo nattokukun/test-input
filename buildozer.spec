@@ -165,15 +165,10 @@ android.sdk = 30
 #android.gradle_dependencies = "androidx.core:core:1.1.0"
 
 ##############
-###    android.gradle_dependencies = "androidx.documentfile:documentfile:1.0.1","androidx.core:core:1.1.0"
-
+## android.gradle_dependencies = "androidx.documentfile:documentfile:1.0.1","androidx.core:core:1.1.0"
 ## android.gradle_dependencies = androidx.documentfile:documentfile:1.0.1	OK
-
 ## android.gradle_dependencies = androidx.documentfile:documentfile:1.0.1,androidx.core:core:1.7.0		NG
-
 android.gradle_dependencies = androidx.documentfile:documentfile:1.0.1,androidx.core:core:1.1.0
-
-
 ##############
 
 
