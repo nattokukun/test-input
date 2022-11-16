@@ -119,8 +119,7 @@ class MainForm(Widget):
     def __init__(self, **kwargs):
         super(MainForm, self).__init__(**kwargs)
         # super().__init__(**kwargs)
-        self.form_init()
-        print('* form_init exec')
+
     #----------------------------------------------
     #----------------------------------------------
 
@@ -241,11 +240,11 @@ class MainForm(Widget):
 #---------------------------------------------------------------------------------
 #                   App
 #---------------------------------------------------------------------------------
-class MainApp(App):
+class TestApp(App):
     def __init__(self, **kwargs):
-        super(MainApp, self).__init__(**kwargs)
+        super(TestApp, self).__init__(**kwargs)
         # super().__init__(**kwargs)
-        self.title = "Test Input"
+        self.title = "window"
 
     def build(self):    # Root Widget
         tp_mf = MainForm()
@@ -253,15 +252,19 @@ class MainApp(App):
         ## tp_mf.ids.label3.text = 'Oh My God'
         #######
         tp_mf.ids.input1.focus = True
+
+
+
         #######
         tp_mf.ids.input1.width = tp_mf.ids.input1.width / 2
         tp_mf.ids['input2'].width = tp_mf.ids['input2'].width / 2
         #######
         """
+        tp_mf.form_init()
         return tp_mf
 
 #---------------------------------------------------------------------------------
 #                   Run
 #---------------------------------------------------------------------------------
-#if __name__ == '__main__':
-#    MainApp().run()
+## if __name__ == '__main__':
+##    TestApp().run()
