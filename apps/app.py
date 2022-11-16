@@ -15,6 +15,7 @@ sys.path.append(xxx_dir)
 """
 
 
+
 #######################
 ## kvファイルの明示的なロード
 from kivy.lang import Builder
