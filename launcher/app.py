@@ -10,18 +10,21 @@ Config.set('graphics', 'multisamples', '0')
 from kivy.app import App
 from kivy.uix.label import Label
 
+#############
+xxx_dir = 'launcher'
+#############
+
+#############
+import sys
+sys.path.append(xxx_dir)
+#############
+
+
 class Launcher(App):
 
     def build(self):
 
-        #############
-        xxx_dir = 'launcher'
-        #############
 
-        #############
-        import sys
-        sys.path.append(xxx_dir)
-        #############
 
 
         #############
