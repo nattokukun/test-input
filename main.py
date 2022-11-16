@@ -2,7 +2,7 @@
 
 
 #######################
-# ƒ\[ƒXƒtƒHƒ‹ƒ_
+# ã‚½ãƒ¼ã‚¹ãƒ•ã‚©ãƒ«ãƒ€
 xxx_dir = 'apps'
 
 import sys
@@ -10,10 +10,19 @@ sys.path.append(xxx_dir)
 #######################
 
 #######################
-## kvƒtƒ@ƒCƒ‹‚Ì–¾¦“I‚Èƒ[ƒh
+## kvãƒ•ã‚¡ã‚¤ãƒ«ã®æ˜ç¤ºçš„ãªãƒ­ãƒ¼ãƒ‰
 from kivy.lang import Builder
 Builder.load_file(xxx_dir+"/"+"main.kv")
 #######################
+
+##########################
+from kivy.app import App
+class Apps(App):
+    def build(self):
+        from mainxx import MainForm
+        tp_mf = MainForm()
+        return tp_mf
+##########################
 
 
 def run_entrypoint(entrypoint):
@@ -28,7 +37,7 @@ def run_entrypoint(entrypoint):
 
 
 def run_app(tb=None):
-    from apps.app import Apps
+    #### from apps.app import Apps
     Apps().run()
 
 

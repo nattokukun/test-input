@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
 
+"""
 from kivy.app import App
-
-
-
-
-
+"""
 
 '''
 #######################
@@ -27,7 +24,7 @@ sys.path.append(xxx_dir)
 ### Builder.load_file(xxx_dir+"/"+"main.kv")
 #######################
 
-
+"""
 class Apps(App):
 
     def build(self):
@@ -35,4 +32,4 @@ class Apps(App):
         from mainxx import MainForm
         tp_mf = MainForm()
         return tp_mf
-
+"""
