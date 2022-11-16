@@ -21,12 +21,6 @@ import sys
 sys.path.append(xxx_dir)
 #############
 
-#############
-## kvファイルの明示的なロード
-Builder.load_file(xxx_dir+"/"+"test.kv")
-## self.root = Builder.load_file(xxx_dir+"/"+"test.kv")
-##self.root = Builder.load_file("test.kv")
-#############
 
 class Launcher(App):
 
@@ -35,6 +29,11 @@ class Launcher(App):
 
 
 
+        #############
+        ## kvファイルの明示的なロード
+        self.root = Builder.load_file(xxx_dir+"/"+"test.kv")
+        ##self.root = Builder.load_file("test.kv")
+        #############
 
         from mainxx import MainForm
         tp_mf = MainForm()
