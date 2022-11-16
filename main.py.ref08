@@ -1,14 +1,6 @@
 # -*- coding: utf-8 -*-
 
 
-#######################
-# ソースフォルダ
-xxx_dir = 'apps'
-
-import sys
-sys.path.append(xxx_dir)
-#######################
-
 def run_entrypoint(entrypoint):
     import runpy
     import sys

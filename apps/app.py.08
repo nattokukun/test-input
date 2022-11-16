@@ -5,12 +5,8 @@ from kivy.app import App
 # ソースフォルダ
 xxx_dir = 'apps'
 
-"""
-#######################
 import sys
 sys.path.append(xxx_dir)
-#######################
-"""
 
 ## kvファイルの明示的なロード
 from kivy.lang import Builder
