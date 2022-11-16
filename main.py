@@ -42,6 +42,10 @@ def run_entrypoint(entrypoint):
 
 
 def dispatch():
+    ##----------------------------------------------------##
+    ##          　　　　　コメント
+    ##----------------------------------------------------##
+    """
     import os
 
     # desktop launch
@@ -49,6 +53,7 @@ def dispatch():
     entrypoint = os.environ.get("KIVYLAUNCHER_ENTRYPOINT")
     if entrypoint is not None:
         return run_entrypoint(entrypoint)
+    """
 
     # try android
     try:
