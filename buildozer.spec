@@ -1,15 +1,18 @@
 [app]
 
 # (str) Title of your application
+#######################
 ## title = (NTK) Kivy Launcher
 title = Test Input
 
 # (str) Package name
 ## package.name = un_official_launcher
 #      name - is error!
+#######################
 package.name = test_input
 
 # (str) Package domain (needed for android/ios packaging)
+#######################
 package.domain = org.kivy
 
 # (str) Source code where the main.py live
@@ -31,7 +34,8 @@ source.exclude_dirs = tests, bin, art
 #source.exclude_patterns = license,images/*/*.jpg
 
 # (str) Application versioning (method 1)
-version = 0.1
+#######################
+version = 0.0.1
 
 # (str) Application versioning (method 2)
 # version.regex = __version__ = ['"](.*)['"]
@@ -43,6 +47,7 @@ version = 0.1
 ### requirements = python3==3.9.12,hostpython3==3.9.12,kivy,pyjnius,android
 ### requirements = python3==3.8.9,hostpython3==3.8.9,kivy,pyjnius,android
 ### requirements = python3==3.8.9,hostpython3==3.8.9,kivy==2.2.0,pyjnius,android
+#######################
 requirements = python3==3.8.9,hostpython3==3.8.9,kivy==2.1.0,pyjnius,android
 
 # (str) Custom source folders for requirements
@@ -56,7 +61,8 @@ requirements = python3==3.8.9,hostpython3==3.8.9,kivy==2.1.0,pyjnius,android
 #presplash.filename = %(source.dir)s/data/presplash.png
 
 # (str) Icon of the application
-#icon.filename = %(source.dir)s/data/icon.png
+#######################
+icon.filename = %(source.dir)s/data/icon.png
 
 # (str) Supported orientation (one of landscape, portrait or all)
 orientation = all
