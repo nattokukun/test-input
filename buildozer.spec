@@ -60,7 +60,7 @@ requirements = python3==3.8.9,hostpython3==3.8.9,kivy==2.1.0,pyjnius,android
 # (str) Presplash of the application
 #presplash.filename = %(source.dir)s/data/presplash.png
 #######################
-presplash.filename = %(source.dir)s/data/icon.png
+presplash.filename = %(source.dir)s/data/presplash.png
 
 # (str) Icon of the application
 #######################
