@@ -4,6 +4,7 @@ Launcher上
 	main.kv
 	main.py
 	メインフォームは MainFormクラスとする
+	MainWidget() メソッドを作成
 
 【移行】
 appsフォルダにソース全コピー
@@ -15,7 +16,7 @@ appsフォルダにソース全コピー
 以下ファイルのbranchesの確認・修正
 	gitwork\test-input\.github\workflows\main.yaml
 
-以下ファイルbuildozer.specの確認・修正
+以下ファイルbuildozer.specの主に確認・修正
 	title = Test Input
 	package.name = test_input
 	version = 0.1

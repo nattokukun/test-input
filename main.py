@@ -18,9 +18,13 @@ Builder.load_file(apps_dir+"/"+"main.kv")
 from kivy.app import App
 class Apps(App):
     def build(self):
+        """
         from mainxx import MainForm
         tp_mf = MainForm()
         return tp_mf
+        """
+        from mainxx import MainWidget
+        return MainWidget()
 ##----------------------------------------------------##
 
 def run_entrypoint(entrypoint):
