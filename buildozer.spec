@@ -105,7 +105,7 @@ fullscreen = 0
 
 ########################
 #	android.api = 28
-android.api = 30
+#	android.api = 30
 ############################
 
 
@@ -116,7 +116,6 @@ android.api = 30
 ############################
 #android.sdk = 20
 #android.sdk = 30
-android.sdk = 30
 ############################
 
 # (str) Android NDK version to use
@@ -184,7 +183,8 @@ android.gradle_dependencies = androidx.documentfile:documentfile:1.0.1,androidx.
 android.enable_androidx = True
 
 # (str) python-for-android branch to use, defaults to stable
-p4a.branch = master
+#	p4a.branch = master
+p4a.branch = release-2022.12.20
 
 # (str) XML file to include as an intent filters in <activity> tag
 #android.manifest.intent_filters =
@@ -216,7 +216,8 @@ android.manifest.launch_mode = standard
 #android.copy_libs = 1
 
 # (str) The Android arch to build for, choices: armeabi-v7a, arm64-v8a, x86
-android.arch = armeabi-v7a
+#	android.arch = armeabi-v7a
+android.archs = armeabi-v7a,arm64-v8a
 
 #
 # Python for android (p4a) specific
