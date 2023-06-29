@@ -2,13 +2,13 @@ Launcherからの移行方法
 【確認】
 Launcher上
 	main.kv
-	main.py
-	メインフォームは MainFormクラスとする
-	MainWidget() メソッドを作成
+	main.py が存在すること
+	Appクラスのビルドは、return MainWidget() であること
+	（それに応じて MainWidget() を作成）
 
 【移行】
 appsフォルダにソース全コピー
-	main.py → mainxx.py 改名
+	main.py → mainxx.py コピー(改名)
 	mainxx.pyの以下をコメントアウト
 		#if __name__ == '__main__':
 		#    MainApp().run()

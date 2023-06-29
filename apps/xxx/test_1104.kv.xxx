@@ -55,7 +55,7 @@
 
 <TitleButton@Button>
 
-<XMainForm>
+<MainForm>
 	#:set GAME_CAPTION 'Game : '
 
 	#--------------------------------------------------
@@ -90,15 +90,6 @@
 
         	Button:
 	            text: "button 1"
-
-		        Image:
-					#########
-		            source: "_img_test.png"
-					#########
-					## fit_mode: "scale-down"	# 上手く行かないので直接サイズ指定
-					pos: self.parent.pos
-		    		size: self.parent.width, self.parent.height
-
 
         	Button:
 	            text: "Quit"
