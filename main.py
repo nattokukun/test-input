@@ -9,6 +9,9 @@ apps_dir = 'apps'
 # ソースフォルダを設定
 import sys
 sys.path.append(apps_dir)
+##
+sys.path.append(apps_dir + "/" + "_lib")
+##
 
 # kvファイルの明示的なロード
 from kivy.lang import Builder
