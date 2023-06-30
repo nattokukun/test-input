@@ -172,9 +172,10 @@ def MainWidget():
     return tp_mf
 
 ###############################
-def image_path(p_image_file_name):  # ファイル名
+def adapted_image_path(p_image_file_name):  # ファイル名
                                     # パス・フィル名
     IMAGE_DIR = '_images'
+    """
     if cssys.is_android():
     # android launcher
         # 相対位置が分からないので、絶対パスにする
@@ -191,12 +192,12 @@ def image_path(p_image_file_name):  # ファイル名
                 os.path.join( os.path.dirname(__file__), IMAGE_DIR, p_image_file_name )
         )
 
-        """
+        ""
         debug_log('%%%%%%%%%%% ttt')
         debug_log(ttt)
         debug_log('%%%%%%%%%%% ttt')
         t_path = ttt
-        """
+        ""
 
         # ファイルサイズを得る
         t_file = File(t_dir_file_name)
@@ -206,11 +207,19 @@ def image_path(p_image_file_name):  # ファイル名
             t_msg = f'exist file.. {t_dir_file_name}'
         else:
             t_msg = f'* not exist file! .. {t_dir_file_name}'
+
+
         debug_log(t_msg)
     else:
     # windows
         # 相対パス
         t_dir_file_name = IMAGE_DIR + '\\' + p_image_file_name
+    """
+
+    ############
+    t_dir_file_name = IMAGE_DIR + '/' + p_image_file_name
+    ############
+
     return t_dir_file_name
 ###############################
 
@@ -223,7 +232,7 @@ class MainApp(App):
 
 ###########################
     def image_path(self, p_file_name):
-        return image_path(p_file_name)
+        return adapted_image_path(p_file_name)
 ###########################
 
     def build(self):    # Root Widget
@@ -244,4 +253,4 @@ class MainApp(App):
 #                   Run
 #---------------------------------------------------------------------------------
 ## if __name__ == '__main__':
-##    MainApp().run()
+##     MainApp().run()
