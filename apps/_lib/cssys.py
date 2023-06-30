@@ -24,12 +24,31 @@ import os
 #                   関数群
 #------------------------------------------------------------------------------
 # デバッグログ
+def debug_log(p_msg,            # メッセージテキスト
+              p_crlf=False):    # False:CRLFを潰す
+    t_msg = p_msg .replace(':', '$')
+    if not p_crlf:
+        t_msg = t_msg.replace('\n', ' ')
+    else:
+        t_msg = t_msg.replace('\n', '\n#R#- ')
+    ## Logger.debug('### ' + t_msg)
+    Logger.debug('#R# ' + t_msg)
+
+debug_log('')
+debug_log('')
+debug_log('***********************************************')
+debug_log('*****          Logger debug start         *****')
+debug_log('***********************************************')
+"""
+
+# デバッグログ
 def debug_log(p_msg):
     t_msg = p_msg .replace(':', '$')
     t_msg = t_msg.replace('\n', ' ')
     Logger.debug('### ' + t_msg)
 
 debug_log('************** Logger debug start *************')
+"""
 
 # Windowsであるか
 def is_windows():

@@ -17,19 +17,12 @@ Builder.load_file(apps_dir+"/"+"main.kv")
 # Appの定義
 from kivy.app import App
 class Apps(App):
-
-    ##
-    def image_path(self, p_file_name):
-        ## return image_path(p_file_name)
-        return apps_dir + "/" + p_file_name
-    ##
-
     def build(self):
-        """ ##
+        """
         from mainxx import MainForm
         tp_mf = MainForm()
         return tp_mf
-        ## """
+        """
         from mainxx import MainWidget
         return MainWidget()
 ##----------------------------------------------------##
