@@ -21,7 +21,7 @@ class Apps(App):
     ##
     def image_path(self, p_file_name):
         ## return image_path(p_file_name)
-        return apps_dir + "/" + p_file_name
+        return apps_dir + "/_images/" + p_file_name
     ##
 
     def build(self):
