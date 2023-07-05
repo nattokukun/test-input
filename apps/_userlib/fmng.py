@@ -5,9 +5,9 @@
 #//////////////////////////////////////////////////////////////////////////////
 import traceback
 import os
-from _lib import cssys
+from _userlib import cssys
 ## import cssys
-from _lib.cssys import debug_log
+from _userlib.cssys import debug_log
 ## import const
 """
 from pickle import NONE
@@ -548,7 +548,7 @@ def not_found_mkdir(p_path):    # フォルダ名絶対パス
 def adr_get_file_size(p_file_uri):  # ファイルuri
                                     # サイズ < 0:存在しない
 
-    from _lib import cssys
+    from _userlib import cssys
     t_file_doc = cssys.uri_to_doc(p_file_uri)
     t_size = t_file_doc.length()
     if t_size == 0:

@@ -16,8 +16,8 @@ from kivy.uix.widget import Widget
 ## import xxsubtype
 
 ######################
-from _lib import cssys
-from _lib.cssys import debug_log
+from _userlib import cssys
+from _userlib.cssys import debug_log
 ######################
 
 # OpenGLの調整
@@ -36,7 +36,7 @@ else:
 
 ##################################
 ## import textinput4ja
-from _lib import textinput4ja
+from _userlib import textinput4ja
 ##################################
 
 #---------------------------------------------------------------------------------
@@ -183,8 +183,8 @@ def adapted_image_path(p_image_file_name):  # ファイル名
         import os
         from jnius   import autoclass
         from android import mActivity, activity
-        from _lib import fmng
-        from _lib.cssys import debug_log
+        from _userlib import fmng
+        from _userlib.cssys import debug_log
         Uri  = autoclass('android.net.Uri')
         File = autoclass('java.io.File')
 

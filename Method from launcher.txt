@@ -3,7 +3,7 @@ Launcherからの移行方法
 Launcher上
 	main.kv
 	main.py が存在すること
-	Appクラスのビルドは、return MainWidget() であること
+	Appクラスのビルド関数は、return MainWidget() であること
 	（それに応じて MainWidget() を作成）
 
 【移行】
@@ -12,6 +12,9 @@ appsフォルダにソース全コピー
 	mainxx.pyの以下をコメントアウト
 		#if __name__ == '__main__':
 		#    MainApp().run()
+RepString で、*.kv ファイルの　_userlib/ を apps/_userlib/
+に一括変換
+
 
 以下ファイルのbranchesの確認・修正
 	gitwork\test-input\.github\workflows\main.yaml

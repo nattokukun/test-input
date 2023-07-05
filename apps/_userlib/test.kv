@@ -1,0 +1,58 @@
+﻿# -*- coding: utf-8 -*-
+
+###################################
+#:include apps/_userlib/testCom.kv
+###################################
+
+
+<TestInput@TextInput_JA>:
+
+	##	#:import main main
+	##	#:set INPUT_H main.INPUT_H	# android では main.がエラーとなる
+	##	#:set INPUT_W main.INPUT_W
+
+	# 定数定義
+	#:set INPUT_H 32 * 2
+	#:set INPUT_W INPUT_H * 3
+
+    multiline: False
+
+    # 位置
+    # pos_hint: {}
+    pos_hint: {"center_y": 0.95, "center_x": 0.1}
+
+	# サイズ
+    size_hint: (None, None)
+    width : INPUT_W
+    height: INPUT_H
+
+	# 文字入力
+    halign: 'right'
+    input_filter: 'int'
+
+    ## 	この定義段階では root がエラーになる
+    ## on_text_validate: root.InputEnter()
+
+<ScoreInput@TextInput_JA>:
+    multiline: False
+
+    # 位置
+    # pos_hint: {}
+    #pos_hint: {"center_y": 0.95, "center_x": 0.1}
+
+	# サイズ
+    #size_hint: (None, None)
+    #width : INPUT_W
+    #height: INPUT_H
+
+	# 文字入力
+    #  halign: 'right'
+    #  input_filter: 'int'
+
+<GameTotalLabel@Label>:
+	text: '0'
+	# 文字揃え
+    text_size: self.size
+    halign: 'right'
+
+<TitleButton@Button>
